@@ -87,7 +87,8 @@ nav{
 
 .about{
     max-width: 100vw;
-    height: 700px;
+    min-height: 700px;
+    min-height: fit-content;
     display: flex;
   flex-direction: column;
   overflow: hidden;
