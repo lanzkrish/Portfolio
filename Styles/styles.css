@@ -129,6 +129,21 @@ nav{
   margin: 10px;
   gap: 30px;
 }
+/* .featurecard .card .card-body{
+  display: none;
+  transition: all 1s ease-in-out;
+}
+.featurecard .card:hover > img{
+  display: absolute;
+  left: 10px;
+  width: 300px;
+}
+.featurecard .card:hover > .card-body{
+  z-index: 2;
+  display: block;
+  text-align: center;
+  width: 100px;
+} */
 
 .more{
   text-align: center;
