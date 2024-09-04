@@ -5,45 +5,422 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .invoice-box { max-width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
-        h1 { text-align: center; }
-        table { width: 100%; line-height: inherit; text-align: left; }
-        table td { padding: 5px; vertical-align: top; }
-        table tr td:nth-child(2) { text-align: right; }
-        table tr.heading td { background: #eee; border-bottom: 1px solid #ddd; font-weight: bold; }
-        table tr.item td { border-bottom: 1px solid #eee; }
-        table tr.item.last td { border-bottom: none; }
-        table tr.total td:nth-child(2) { border-top: 2px solid #eee; font-weight: bold; }
+        *{
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
+        .header{
+            margin: 0px 50px;
+            margin-bottom: 0;
+        }
+        .header p{
+            margin-top: 5px;
+
+        }
+        .invoice-no p{
+            margin-right: 15px;
+        }
+        .header, .footer {
+            text-align: start;
+            margin-bottom: 20px;
+        }
+        .header img {
+            max-width: 150px;
+        }
+        /* .invoice-info, .invoice-details, .total, .notes {
+            margin-bottom: 20px;
+        } */
+        .invoice-info table, .invoice-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .invoice-info table th, .invoice-info table td,
+        .invoice-details table th, .invoice-details table td{
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: right;
+        }
+        .final tr td{
+            border: 0px solid;
+            text-align: right;
+            font-weight: 600;
+        }
+        .invoice-info table th, .invoice-details table th {
+            background-color: #f4f4f4;
+        }
+        .invoice-details table td {
+            /* height: 500px; */
+            position: relative;
+            top: 0px;
+            text-align: left;
+        }
+        .invoice-details table td p{
+            height: 300px;
+            /* position: relative;
+            top: 0px; */
+        }
+        .final-statement{
+            display: flex;
+    flex-wrap: wrap;
+    /* border: 1px dashed black;    */
+        }
+        .statement{
+             order: 0; flex-basis: calc(70% - 20px);
+        }
+        .taxable-amount{
+             order: 0; flex-basis: calc(30% + 10px);
+        }
+        .total{
+            font-size: 13px;
+        }
+        .total table {
+            width: 100%;
+            /* border: none; */
+        }
+
+        .details table{
+            padding: 8px;
+            width: 100%;
+            font-weight: 400;
+        }
+        .details table tbody td{
+            border: 1px solid black !important;
+        }
+        .total table td {
+            /* padding: 8px; */
+            text-align: right;
+            font-size: 14px;
+        }
+        .notes {
+            font-size: 12px;
+        }
+        .notes p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="invoice-box" id="invoice">
-        <h1>Invoice</h1>
-        <table cellpadding="0" cellspacing="0">
-            <tr class="heading">
-                <td>Description</td>
-                <td>Price</td>
-            </tr>
-            <tr class="item">
-                <td>Web Development</td>
-                <td>$300.00</td>
-            </tr>
-            <tr class="item last">
-                <td>Hosting (3 months)</td>
-                <td>$75.00</td>
-            </tr>
-            <tr class="total">
-                <td></td>
-                <td>Total: $375.00</td>
-            </tr>
-        </table>
+    <div class="container" id="master_region">
+        <div class="header">
+            <div style="display: flex; justify-content: space-between;">
+                <h2>Shree Hari Agro Industries Limited</h2>
+                <h3>(StarExport House)</h3>
+                <h5>Third for office</h5>
+            </div>
+            <div style="font-size: 12px; text-align: start;">
+            <p>Vill. & P.O. Manesar Khedi (Benara Road), Tehsil Bassi, Jaipur, STATE - Rajasthan - 303301 (INDIA)</p>
+            <p>Tel. No(s): 01429-269588, 9828513142 | Fax No.: 01429-216501 | Email: mailto:accounts@datagroup.in</p>
+            <div style="display: flex; justify-content: space-between; font-weight: 600;">
+            <p>GSTIN: 08AADCS7756H1ZY </p>
+            <p>PAN No.: AADCS7756H </p>
+            <p>CIN No.: U15142RJ1995PLC067473</p> 
+            <p>REVERSE CHARGE: N</p>
+            </div>
+            
+            </div>
+        </div>
+
+        <div class="invoice-info" style="display: flex; justify-content: space-between; font-weight: 600; margin-right: 50px;">
+            <div class="invoice-no" style="display: flex; justify-content: space-between;">
+                <p>Invoice No</p>
+                <p>24-25/</p>
+                <p>001224</p>
+            </div>
+            <div>
+                <h2>TAX INVOICE</h2>
+            </div>
+            <div>
+                <p>Date 13 AUG 2024</p>
+            </div>
+        </div>
+
+        <div class="invoice-details">
+
+            <div style="display: flex; justify-content: space-between; text-align: start; font-weight: 600; font-size: 13px;">
+                <div style="border: 1px solid gray; width: 50%; border-left: 0;  border-right:0 ; padding: 10px;">
+                    <P>Invoice To</P>
+                    <p>Shubh Enterprises</p>
+                    <div style="font-weight: 400;">
+                        <p>Ground Floor, Khasra No.203 3/1/1 4/1/1</p>
+                    <p>5-3 0-18 Budhlada Road, Ratia</p>
+                    <p>Fatehabad, State :Haryana, PIN</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <p>GSTIN 06AENPB1924R1Z7</p>
+                        <p>PAN AENPB1924R</p>
+                        <p>STATE CODE 06</p>
+                    </div>
+                </div>
+                <div style="border: 1px solid gray; width: 50%; border-right:0 ; padding: 10px;">
+                    <p>Ship To</p>
+                    <p>As Invoice To</p>
+                </div>
+            </div>
+        </div>
+        <div style=" margin: 0px 100px 0 10px; font-size: 12px;">
+            <div style="display: flex; justify-content: space-between;">
+                <div>
+                    <div>
+                        <span>Transport</span>
+                        <span>Bajrang Bali Transport Co.</span>
+                    </div>
+                    <div>
+                        <span>Vehicle No</span>
+                        <span>HR39D0386</span>
+                    </div>
+                    <div>
+                        <span>GR / LR No.</span>
+                        <span>437</span>
+                    </div>
+                </div>
+                <div>
+                    <div style="margin-top: 16px;">
+                        <span> </span>
+                        <span> </span>
+                    </div>
+                    <div>
+                        <span>Credit Days </span>
+                        <span>0</span>
+                    </div>
+                    <div>
+                        <span>GR/LR Date</span>
+                        <span>13 AUG 2024</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>Supply Place</span>
+                    <span>Haryana</span>
+                    </div>
+                    <div>
+                        <span>Cust. Ref.</span>
+                        <span>DATA-16/24.07.2024</span>
+                    </div>
+                    <div>
+                        <span>Broker</span>
+                        <span>Mathur Enterprises</span>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                <div style="width: max-content; font-weight: 600;">
+                <span>e WayBill No.</span>
+                <span>711450707536</span>
+                </div>
+                <div>
+                    <span>Our Bank. : KOTAK MAHINDRA BANK A/C 9313706265 RTGS KKBK0000271, <br> FSSAI LICENSE NO. 10012013000228 ,URNO.UDYAM-RJ-17-0051763</span>
+                </div>
+            </div>
+            
+        </div>
+        <div class="billing-info invoice-details">
+            <h3>Items</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr</th>
+                        <th>Item Name</th>
+                        <th>Bags</th>
+                        <th>HSN</th>
+                        <th>UOM</th>
+                        <th>Qty.</th>
+                        <th>GST %</th>
+                        <th>Rate</th>
+                        <th>Amount Rs.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>1</p>
+                        </td>
+                        <td>
+                            <p>Soya Refined Oil</p>
+                        </td>
+                        <td>
+                            <p></p>
+                        </td>
+                        <td>
+                            <p>150790</p>
+                        </td>
+                        <td><p>M TON</p></td>
+                        <td>
+                            <p>4.980</p></td>
+                        <td>
+                            <p>5.00</p>
+                        </td>
+                        <td>
+                            <p>97,194.00</p>
+                        </td>
+                        <td>
+                            <p>484,026.12</p>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- <tbody class="final">
+                    <tr>
+                        <td></td>
+                        <td>Item's Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>4.890</td>
+                        <td></td>
+                    </tr>
+                </tbody> -->
+            </table>
+        </div>
+        <div class="billing-footer">
+            <div class="final-statement" style="display: flex; font-size: 14px;">
+                <div class="statement">
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div style="width: 100%; text-align: center;"><p><strong>Items' Total</strong></p></div>
+                        <div style=" width: 80%; text-align: center;"><p style="margin-left: 70px ;">4.980</p></div>
+                    </div>
+                    <div>
+                        <p><strong>Amount in Words : Five Lakh Eight Thousand Two Hundred Twenty Seven
+                            Taxable Amount 484,026.12
+                            And Forty Three Only</strong></p>
+                    </div>
+                    <div>
+                        <p style="text-align: center; margin-top: 5px;">
+                            <strong>HSN WISE GST PAYABLE DETAILS</strong>
+                        </p>
+                    </div>
+                    <div class="details" style="font-size: 12px; border: 1px slid black;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>HSN</td>
+                                    <td>TAXABLE AMT</td>
+                                    <td>SGST%</td>
+                                    <td>SGST AMT</td>
+                                    <td>CGST%</td>
+                                    <td>CGST AMT</td>
+                                    <td>IGST%</td>
+                                    <td>IGST AMT</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div>
+                                    <tr>
+                                        <td>150790</td>
+                                        <td>484,026.12</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>5.00</td>
+                                        <td>24,201.31</td>
+                                    </tr>
+                                </div>
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>484,026.12</td>
+                                    <td></td>
+                                    <td>0.00</td>
+                                    <td></td>
+                                    <td>0.00</td>
+                                    <td></td>
+                                    <td>24,201.31</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div>
+                        <ol type="1">
+                            <li>If this bill is not settled within due period, interest @24% p.a.will be charged on the due amount.</li>
+                            <li>No quality complaints shall be entertained after two days of receipt of material.</li> 
+                            <li>All payment to be made only by account payee cheque /D.D. / R.T.G.S. in favour of the company.</li>
+                            <li>All disputes subject to Jaipur Jurisdiction only.</li>
+                        </ol>
+                        <p>E. & O. E.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <p>C2510720/12/07/2024 Future GeneralI India Insurence co. ltd.</p>
+                    </div>
+                </div>
+                <div class="taxable-amount" style=" align-items: end;">
+                    <div class="total">
+                        <table>
+                            <tr>
+                                <td><strong>Taxable Amount</strong></td>
+                                <td>484,026.12</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discount</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SGST</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CGST</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IGST</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>forwarding</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Insurance</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Other Charges</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Misc Charges</strong></td>
+                                <td>24,201.31</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Round Off</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>TCS</strong></td>
+                                <td>0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grand Total</strong></td>
+                                <td><strong>508,227.43</strong></td>
+                            </tr>
+                        </table>
+                        <p><strong>For Shree Hari Agro Industries Limited</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin:60px 60px 60px 0; font-size: 14px;">
+                <p><strong>Freight to Drive 0.00</strong></p>
+                <p><strong>Authorised Signatory</strong></p>
+            </div>
+        </div>
     </div>
 
+    <div>Download the PDF</div>
     <button onclick="generatePDF()">Download PDF</button>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
         function generatePDF() {
@@ -53,12 +430,12 @@
             const doc = new jsPDF();
 
             // Use html2canvas to capture the HTML element as an image
-            html2canvas(document.getElementById('invoice')).then(canvas => {
+            html2canvas(document.getElementById('master_region')).then(canvas => {
                 // Convert the canvas to an image
-                const imgData = canvas.toDataURL('image/png');
+                const imgData = canvas.toDataURL('image/jpeg');
                 console.log(canvas.height, canvas.width)
                 // Add the image to the PDF
-                doc.addImage(imgData, 'PNG', 1, 1, canvas.width/9, canvas.height/9 );
+                doc.addImage(imgData, 'JPEG', 1, 1, canvas.width/8.1, canvas.height/7.9 );
 
                 // Save the PDF
                 doc.save('invoice.pdf');
@@ -67,5 +444,14 @@
             });
         }
     </script>
+    <script>
+        const crypto = require('crypto');
+
+const input = "100xdevs";
+const hash = crypto.createHash('sha256').update(input).digest('hex');
+
+console.log(hash)
+    </script>
+    <script src="./dailycode.js"></script>
 </body>
 </html>
